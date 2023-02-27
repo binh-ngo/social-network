@@ -2,7 +2,7 @@ const { Thought, User } = require("../models");
 
 const thoughtController = {
   // get all thoughts
-  getAllThought(req, res) {
+  getAllThoughts(req, res) {
     Thought.find({})
       .populate({
         path: "reactions",
@@ -18,7 +18,7 @@ const thoughtController = {
   },
 
   // get single thought :id
-  getThoughtById({ params }, res) {
+  getSingleThought({ params }, res) {
     Thought.findOne({ _id: params.id })
       .populate({
         path: "reactions",
@@ -119,10 +119,10 @@ const thoughtController = {
   },
 
   // delete reaction
-  removeReaction({ params }, res) {
+  deleteReaction({ params }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
-      { $pull: { reactions: { reactionId: params.reactionId } } },
+      { $pull: { reactions: { reactionId: params.reactionId } } }, // takes the given parameter (reaction id) and removes it from the thought
       { new: true }
     )
       .then((thoughtData) => res.json(thoughtData))

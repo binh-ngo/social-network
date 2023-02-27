@@ -2,7 +2,7 @@ const { User, Thought } = require("../models");
 
 const userController = {
   // get all users
-  getAllUser(req, res) {
+  getAllUsers(req, res) {
     User.find({})
       .populate({
         path: "friends",
@@ -18,7 +18,7 @@ const userController = {
   },
 
   // get one user :id
-  getUserById({ params }, res) {
+  getSingleUser({ params }, res) {
     User.findOne({ _id: params.id })
       .populate({
         path: "thoughts",
@@ -73,8 +73,6 @@ const userController = {
         if (!userData) {
           return res.status(404).json({ message: "User with this ID not found!" });
         }
-        // BONUS: get ids of user's `thoughts` and delete them all
-        // $in to find specific things
         return Thought.deleteMany({ _id: { $in: userData.thoughts } });
       })
       .then(() => {
@@ -101,10 +99,10 @@ const userController = {
   },
 
   // delete friend
-  removeFriend({ params }, res) {
+  deleteFriend({ params }, res) {
     User.findOneAndUpdate(
       { _id: params.userId },
-      { $pull: { friends: params.friendId } },
+      { $pull: { friends: params.friendId } }, // pull takes the provided parameter and removes it
       { new: true }
     )
       .then((userData) => {
