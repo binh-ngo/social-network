@@ -25,10 +25,4 @@
   *Contact Info:*
     
   GitHub: [binh-ngo](https://github.com/binh-ngo)
-      
-  ## License
-        
-  *This application has the .*
-        
-  For more information please view the [license description]().
     
