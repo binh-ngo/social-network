@@ -21,7 +21,7 @@ module.exports = (
   timestamp,
   { monthLength = "short", dateSuffix = true } = {}
 ) => {
-  // month object
+  // month object with ternary operator assigning a shorter way to write out each month
 const months = {
     0: monthLength === "short" ? "Jan" : "January",
     1: monthLength === "short" ? "Feb" : "February",
@@ -54,9 +54,9 @@ if (hour === 0) {
 const minutes = (dateObj.getMinutes() < 10 ? "0" : "") + dateObj.getMinutes();
 
   // set `am` or `pm`
-const periodOfDay = dateObj.getHours() >= 12 ? "pm" : "am";
+const timeOfDay = dateObj.getHours() >= 12 ? "pm" : "am";
 
-const formattedTimeStamp = `${formattedMonth} ${dayOfMonth}, ${year} at ${hour}:${minutes} ${periodOfDay}`;
+const formattedTimeStamp = `${formattedMonth} ${dayOfMonth}, ${year} at ${hour}:${minutes} ${timeOfDay}`;
 
 return formattedTimeStamp;
 };

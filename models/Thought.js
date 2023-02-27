@@ -37,7 +37,7 @@ const ThoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
-      required: "Thought is Required",
+      required: [true, "Thought is Required"],
       minlength: 1,
       maxlength: 280,
     },
@@ -66,7 +66,9 @@ const ThoughtSchema = new Schema(
   }
 );
 
-ThoughtSchema.virtual("reactionCount").get(function () {
+ThoughtSchema
+  .virtual("reactionCount")
+  .get(function () {
   return this.reactions.length;
 });
 

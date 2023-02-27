@@ -5,13 +5,13 @@ const UserSchema = new Schema (
         username: {
             type: String,
             unique: true,
-            required: "Username is Required",
+            required: [true, "Username is Required"],
             trim: true,
         },
         email: {
             type: String,
             unique: true,
-            required: "Username is Required",
+            required: [true, "Username is Required"],
             match: [/.+@.+\..+/],
         },
         thoughts: [
