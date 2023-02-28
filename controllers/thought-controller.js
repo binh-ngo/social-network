@@ -20,6 +20,7 @@ const thoughtController = {
   // get single thought :id
   getSingleThought({ params }, res) {
     Thought.findOne({ _id: params.id })
+      // populate the reactions array and select the version id
       .populate({
         path: "reactions",
         select: "-__v",
@@ -27,7 +28,7 @@ const thoughtController = {
       .select("-__v")
       .then((thoughtData) => {
         if (!thoughtData) {
-          return res.status(404).json({ message: "thought with this ID not found!" });
+          return res.status(404).json({ message: "Thought with this ID not found!" });
         }
         res.json(thoughtData);
       })
